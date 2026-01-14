@@ -18,6 +18,7 @@ def show_auth_page():
     st.title("🔑 Login to Groq Chatbot")
 
     tab1, tab2 = st.tabs(["Sign Up", "Login"])
+    supabase = get_supabase_client()
 
     with tab1:
         st.subheader("Create an Account")
@@ -25,7 +26,7 @@ def show_auth_page():
         password = st.text_input("Password", type="password", key="signup_password")
         if st.button("Sign Up"):
             try:
-                supabase = get_supabase_client()
+                
                 result = supabase.auth.sign_up({"email": email, "password": password})
                 if result.user:
                     st.success("✅ Account created successfully! Please log in.")
